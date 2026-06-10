@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Resume Analysis Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AI Resume Analysis Report</h1>
+
+    <!-- ATS Score -->
+
+    <div class="card">
+
+        <h2>ATS Compatibility Score</h2>
+
+        <h1>{{ score }}%</h1>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+                 style="width: {{ score }}%;">
+
+                {{ score }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Resume Ratings -->
+
+    <div class="card">
+
+        <h2>Resume Section Ratings</h2>
+
+        <table>
+
+            <tr>
+                <th>Section</th>
+                <th>Score</th>
+            </tr>
+
+            <tr>
+                <td>Skills</td>
+                <td>{{ skills_score }}/10</td>
+            </tr>
+
+            <tr>
+                <td>Projects</td>
+                <td>{{ project_score }}/10</td>
+            </tr>
+
+            <tr>
+                <td>Experience</td>
+                <td>{{ experience_score }}/10</td>
+            </tr>
+
+            <tr>
+                <td>Certifications</td>
+                <td>{{ certification_score }}/10</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Missing Keywords -->
+
+    <div class="card">
+
+        <h2>Missing Skills / Keywords</h2>
+
+        <ul>
+
+            {% for skill in missing_keywords %}
+
+                <li>{{ skill }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Suggestions -->
+
+    <div class="card">
+
+        <h2>Improvement Suggestions</h2>
+
+        <ul>
+
+            {% for suggestion in suggestions %}
+
+                <li>{{ suggestion }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Detailed Report -->
+
+    <div class="card">
+
+        <h2>Detailed Report</h2>
+
+        <ul>
+
+            {% for item in report %}
+
+                <li>{{ item }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Resume Preview -->
+
+    <div class="card">
+
+        <h2>Resume Preview</h2>
+
+        <p>{{ resume_text }}</p>
+
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+
+        <a href="/">
+
+            <button>
+
+                Analyze Another Resume
+
+            </button>
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
