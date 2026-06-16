@@ -20,6 +20,13 @@ def extract_text_from_pdf(pdf_file):
 
 def calculate_match_score(resume_text, job_description):
 
+    stop_words = {
+        "the","a","an","and","or","is","are","to","of","for",
+        "with","in","on","at","by","from","we","you","our",
+        "their","your","will","can","be","this","that",
+        "responsibilities","required","looking","strong"
+    }
+
     resume_words = set(
         re.findall(r'\w+', resume_text.lower())
     )
@@ -28,13 +35,7 @@ def calculate_match_score(resume_text, job_description):
         re.findall(r'\w+', job_description.lower())
     )
 
-    stop_words = {
-        "and", "or", "the", "a", "an",
-        "required", "requirements",
-        "developer", "job", "role",
-        "candidate", "experience"
-    }
-
+    resume_words = resume_words - stop_words
     jd_words = jd_words - stop_words
 
     if len(jd_words) == 0:
@@ -51,6 +52,13 @@ def calculate_match_score(resume_text, job_description):
 
 def get_missing_skills(resume_text, job_description):
 
+    stop_words = {
+        "the","a","an","and","or","is","are","to","of","for",
+        "with","in","on","at","by","from","we","you","our",
+        "their","your","will","can","be","this","that",
+        "responsibilities","required","looking","strong"
+    }
+
     resume_words = set(
         re.findall(r'\w+', resume_text.lower())
     )
@@ -59,13 +67,7 @@ def get_missing_skills(resume_text, job_description):
         re.findall(r'\w+', job_description.lower())
     )
 
-    stop_words = {
-        "and", "or", "the", "a", "an",
-        "required", "requirements",
-        "developer", "job", "role",
-        "candidate", "experience"
-    }
-
+    resume_words = resume_words - stop_words
     jd_words = jd_words - stop_words
 
     missing = jd_words - resume_words
